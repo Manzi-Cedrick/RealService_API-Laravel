@@ -17,10 +17,10 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
-            'firstname' => $this->faker->firstName(),
-            'lastname' => $this->faker->lastName(),
+            'Firstname' => $this->faker->firstName(),
+            'Lastname' => $this->faker->lastName(),
             'Cash_Paid_Frw' => $this->faker->numberBetween(1, 100),
-            'status_Payment' => $this->faker->randomElement(['Paid', 'Not Paid']),
+            'Status_Payment' => $this->faker->randomElement(['Paid', 'Not Paid']),
             'Quantity_Paid_For' => $this->faker->numberBetween(1, 100),
             'Description_Work' => $this->faker->text(),
         ];
