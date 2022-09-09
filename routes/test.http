@@ -2,3 +2,15 @@ GET http://127.0.0.1:8000/api/clientAll HTTP/1.1
 
 ###
 POST http://127.0.0.1:8000/api/createClient HTTP/1.1
+
+Content-Type: application/json
+
+
+{
+   "Firstname":"Mico",
+   "Lastname":"Sydney",
+   "Cash_Paid_Frw":33,
+   "Status_Payment":"Not Paid",
+   "Quantity_Paid_For":10,
+   "Description_Work":"Reiciendis illo ipsa voluptatem impedit et. Unde quia et vitae et suscipit. Provident dolorem tempora beatae velit quisquam."
+}
