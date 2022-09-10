@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientDataRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -11,21 +12,36 @@ class ClientControl extends Controller
     public function index(){
         return response()->json(Client::all(),200);
     }
-    public function create(){
-
+    public function store(ClientDataRequest $request){
+        $client = Client::create($request->all());
+        return response()->json([
+            'status' => 200,
+            'message ' => 'Client successfully registered',
+            'Client' => $client
+        ]);
     }
-    public function store(Request $request){
-        $data = $request->validate(
-            [
-        'Firstname'=>'required',
-        'Lastname'=>'required',
-        'Cash_Paid_Frw'=>'required',
-        'Status_Payment'=>'required',
-        'Quantity_Paid_For'=>'required',
-        'Description_Work'=>'required',
-            ]
-            );
-        $client = Client::create($data);
-        return response()->json($client,200);
+    public function update(ClientDataRequest $request,Client $client){
+        $client->update($request->all());
+        return response()->json([
+            'status' => true,
+            'message' => 'Client successfully Updated',
+            'Client' => $client,
+        ],200);
+    }
+    public function destroy(Client $client){
+        $client->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Client successfully Deleted',
+            'Client' => $client,
+        ],200);
+    }
+    public function ShowSingleClient(Client $client){
+        $singleClient = Client::find($client);
+        return response()->json([
+            'status' => true,
+            'message' => 'Client successfully Displayed',
+            'Client' => $singleClient,
+        ],200);
     }
 }
