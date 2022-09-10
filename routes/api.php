@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientControl;
+use App\Http\Controllers\ProductController;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/clientAll',[ClientControl::class,'index']);
 Route::post('/createClient',[ClientControl::class,'store']);
+Route::put('/updateClient/{client}',[ClientControl::class,'update']);
+Route::delete('/deleteClient/{client}',[ClientControl::class,'destroy']);
+Route::get('/singleClientInfo/{client}',[ClientControl::class,'ShowSingleClient']);
+
+//Product routes
+
+Route::get('/productsAll',[ProductController::class,'index']);
+Route::post('/createproduct',[ProductController::class,'store']);
+Route::put('/updateproduct/{product}',[ProductController::class,'update']);
+Route::delete('/deleteproduct/{product}',[ProductController::class,'destroy']);
+Route::get('/singleProduct/{product}',[ProductController::class,'ShowSingleProduct']);
