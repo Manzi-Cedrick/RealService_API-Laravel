@@ -17,4 +17,8 @@ class Client extends Model
         'Quantity_Paid_For',
         'Description_Work',
     ];
+
+    public function Product(){
+        return $this->belongsTo('App\Models\Product');
+    }
 }
