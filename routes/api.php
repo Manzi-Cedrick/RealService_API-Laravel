@@ -33,4 +33,4 @@ Route::get('/productsAll',[ProductController::class,'index']);
 Route::post('/createproduct',[ProductController::class,'store']);
 Route::put('/updateproduct/{product}',[ProductController::class,'update']);
 Route::delete('/deleteproduct/{product}',[ProductController::class,'destroy']);
-Route::get('/singleProduct/{product}',[ProductController::class,'ShowSingleProduct']);
+Route::get('/singleproductClients/{product}',[ProductController::class,'ShowSingleProductClients']);
