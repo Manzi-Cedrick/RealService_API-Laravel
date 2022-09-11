@@ -12,6 +12,6 @@ class Product extends Model
         'ProductName','ProductPrice','ProductQRCode','Quantity','Description'
     ];
     public function Client(){
-        return $this->hasMany('App\Models\Client');
+        return $this->hasMany(Client::class,'ProductID');
     }
 }
