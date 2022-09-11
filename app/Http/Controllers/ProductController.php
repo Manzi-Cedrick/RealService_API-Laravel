@@ -13,7 +13,7 @@ class ProductController extends Controller
         return response()->json([
             'status' => true,
             'message'=> 'All Products',
-            'Products' => Product::all(),
+            'Products' => Product::with('Client')->get(),
         ],200);
     }
     public function store(ProductRequest $request){
@@ -29,7 +29,7 @@ class ProductController extends Controller
         return response()->json([
             'status' => true,
             'message'=> 'All Products',
-            'Products' => $product,
+            'Products Updated' => $product,
         ],200);
     }
     public function destroy(Product $product){
@@ -37,15 +37,15 @@ class ProductController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Product successfully Deleted',
-            'Client' => $product,
+            'Product Deleted' => $product,
         ],200);
     }
-    public function ShowSingleProduct(Product $product){
-        $singleProduct = Product::find($product);
+    public function ShowSingleProductClients(Product $product){
+        $finalClientList = Product::find($product->id)->Client;
         return response()->json([
             'status' => true,
             'message' => 'Product successfully Displayed',
-            'Client' => $singleProduct,
+            'Products" clients' => $finalClientList,
         ],200);
-    } 
+    }
 }
