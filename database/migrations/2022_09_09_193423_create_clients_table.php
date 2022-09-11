@@ -17,12 +17,11 @@ return new class extends Migration
             $table->id();
             $table->text('Firstname');
             $table->text('Lastname');
-            $table->integer('ProductID');
             $table->integer('Cash_Paid_Frw');
             $table->string('Status_Payment');
             $table->integer('Quantity_Paid_For');
             $table->longText('Description_Work');
-            $table->foreign('ProductID')->references('id')->on('products');
+            $table->foreignId('ProductID')->nullable()->constrained('products');
             $table->timestamps();
         });
     }
