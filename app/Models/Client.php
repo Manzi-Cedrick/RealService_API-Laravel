@@ -12,13 +12,14 @@ class Client extends Model
     protected $fillable = [
         'Firstname',
         'Lastname',
+        'ProductID',
         'Cash_Paid_Frw',
         'Status_Payment',
         'Quantity_Paid_For',
         'Description_Work',
     ];
 
-    public function Product(){
-        return $this->belongsTo('App\Models\Product');
+    public function product(){
+        return $this->belongsTo(Product::class,'ProductID');
     }
 }
