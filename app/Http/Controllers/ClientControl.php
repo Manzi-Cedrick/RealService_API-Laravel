@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientDataRequest;
 use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ClientControl extends Controller
 {
     //
     public function index(){
-        return response()->json(Client::all(),200);
+        return response()->json(Client::with('product')->get(),200);
     }
     public function store(ClientDataRequest $request){
         $client = Client::create($request->all());
@@ -37,10 +38,10 @@ class ClientControl extends Controller
         ],200);
     }
     public function ShowSingleClient(Client $client){
-        $singleClient = Client::find($client);
+        $singleClient = Client::find($client->id)->product;
         return response()->json([
             'status' => true,
-            'message' => 'Client successfully Displayed',
+            'message' => 'Client successfully Displayed,Product List',
             'Client' => $singleClient,
         ],200);
     }
