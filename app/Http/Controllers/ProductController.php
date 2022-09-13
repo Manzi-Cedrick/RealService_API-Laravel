@@ -33,11 +33,11 @@ class ProductController extends Controller
         ],200);
     }
     public function destroy(Product $product){
-        $product->delete();
+        $DeletedProduct = $product->delete();
         return response()->json([
             'status' => true,
             'message' => 'Product successfully Deleted',
-            'Product Deleted' => $product,
+            'Product Deleted' => $DeletedProduct,
         ],200);
     }
     public function ShowSingleProductClients(Product $product){
