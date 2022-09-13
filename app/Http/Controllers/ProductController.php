@@ -24,12 +24,12 @@ class ProductController extends Controller
             'Products' => $productAdd,
         ],200);
     }
-    public function update(ProductRequest $request,Product $product){
-        $product->update($request->all());
+    public function update(Request $request,$id){
+        $updateProduct = Product::find($id)->update($request->all());
         return response()->json([
             'status' => true,
             'message'=> 'All Products',
-            'Products Updated' => $product,
+            'Products Updated' => $updateProduct,
         ],200);
     }
     public function destroy(Product $product){
