@@ -14,7 +14,7 @@ class Product extends Model
     public function Client(){
         return $this->hasMany(Client::class,'ProductID');
     }
-    public function StockProductRelation(){
+    public function Stock_Product(){
         return $this->belongsTo(Stock::class,'StockID');
     }
 }
