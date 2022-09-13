@@ -43,4 +43,4 @@ Route::get('/stockAll',[StockController::class,'index']);
 Route::post('/createstock',[StockController::class,'store']);
 Route::put('/updatestock/{stock}',[StockController::class,'update']);
 Route::delete('/deletestock/{stock}',[StockController::class,'destroy']);
-Route::get('/singleStockList/{stock}',[ProductController::class,'ShowSingleStock']);
+Route::get('/singleStockList/{stock}',[StockController::class,'ShowSingleStock']);
