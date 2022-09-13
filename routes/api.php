@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientControl;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StockController;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,12 @@ Route::post('/createproduct',[ProductController::class,'store']);
 Route::put('/updateproduct/{product}',[ProductController::class,'update']);
 Route::delete('/deleteproduct/{product}',[ProductController::class,'destroy']);
 Route::get('/singleproductClients/{product}',[ProductController::class,'ShowSingleProductClients']);
+
+//Stock routes
+
+
+Route::get('/stockAll',[StockController::class,'index']);
+Route::post('/createstock',[StockController::class,'store']);
+Route::put('/updatestock/{stock}',[StockController::class,'update']);
+Route::delete('/deletestock/{stock}',[StockController::class,'destroy']);
+Route::get('/singleStockList/{stock}',[ProductController::class,'ShowSingleStock']);
