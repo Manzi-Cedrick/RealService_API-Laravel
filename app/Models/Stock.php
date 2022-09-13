@@ -12,7 +12,7 @@ class Stock extends Model
         'Stock_Name','Stock_Quantity','Registration_Date','Expiration_Date'
     ];
     //Stock to Product Relation
-    public function productsStockRelation(){
+    public function Products_Stock(){
         return $this->hasMany(Product::class,'StockID');
     }
 }
