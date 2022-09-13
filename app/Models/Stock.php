@@ -11,4 +11,8 @@ class Stock extends Model
     protected $fillable = [
         'Stock_Name','Stock_Quantity','Registration_Date','Expiration_Date'
     ];
+    //Stock to Product Relation
+    public function productsStockRelation(){
+        return $this->hasMany(Product::class,'StockID');
+    }
 }
