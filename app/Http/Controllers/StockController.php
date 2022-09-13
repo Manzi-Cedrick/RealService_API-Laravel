@@ -19,7 +19,7 @@ class StockController extends Controller
         return response()->json([
             'status' => true,
             'message'=> 'All Stocks',
-            'Stock Info' => Stock::with('Client')->get(),
+            'Stock Info' => Stock::with('Products_Stock')->get(),
         ],200);
     }
     /**
@@ -45,10 +45,10 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function ShowSingleStock(Request $request)
+    public function ShowSingleStock($id)
     {
         //
-        $SingleStockInfo = Stock::find($request->id)->product;
+        $SingleStockInfo = Stock::find($id)->Products_Stock;
         return response()->json([
             'status' => true,
             'message' => 'Single Stock Info',
@@ -62,7 +62,7 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StockRequest $request,$id)
+    public function update(Request $request,$id)
     {
         //
         $updateStock = Stock::find($id)->update($request->all());
