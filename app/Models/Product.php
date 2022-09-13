@@ -9,9 +9,12 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ProductName','ProductPrice','ProductQRCode','Quantity','Description'
+        'ProductName','ProductPrice','ProductQRCode','Quantity','Description','StockID'
     ];
     public function Client(){
         return $this->hasMany(Client::class,'ProductID');
+    }
+    public function StockProductRelation(){
+        return $this->belongsTo(Stock::class,'StockID');
     }
 }
