@@ -26,6 +26,7 @@ class ProductRequest extends FormRequest
         return [
             'ProductName' => 'required|max:100',
             'ProductPrice' => 'required|min:0',
+            'StockID' => 'required',
             'ProductQRCode' => 'required|min:0',
             'Quantity' => 'required|min:0',
             'Description' => 'required',
