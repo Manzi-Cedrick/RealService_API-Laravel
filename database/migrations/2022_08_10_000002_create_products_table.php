@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text('ProductName');
             $table->integer('ProductPrice');
+            $table->foreignId('StockID')->nullable()->constrained('stocks');
             $table->text('ProductQRCode');
             $table->text('Quantity');
             $table->longText('Description');

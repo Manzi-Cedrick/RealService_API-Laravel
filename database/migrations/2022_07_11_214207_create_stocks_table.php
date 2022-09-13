@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->name('Stock_Name');
+            $table->text('Stock_Name');
             $table->integer('Stock_Quantity');
             $table->date('Registration_Date');
             $table->date('Expiration_Date');
