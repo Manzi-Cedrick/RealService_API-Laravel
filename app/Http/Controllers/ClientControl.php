@@ -45,4 +45,29 @@ class ClientControl extends Controller
             'Client' => $singleClient,
         ],200);
     }
+    public function AllSales() {
+        $AllSales = Client::with(['product'])->where('Status_Payment','Paid')->get();
+        return response()->json([
+            'status' => true,
+            'message' => 'AllSales',
+            'Sales Info'=> $AllSales,
+        ],200);
+    }
+    public function SearchList(Request $request){
+        $client_query= Client::with(['product']);
+        if($request->keyword){
+            $client_query->where('FirstName','LIKE','%'.$request->keyword.'%');
+        }
+        if($request->search){
+            $client_query->whereHas('product',function ($query) use ($request){
+                $query->where('ProductName','LIKE','%'.$request->search.'%');
+            });
+        }
+        $searchList = $client_query->get();
+        return response()->json([
+            'status' => true,
+            'message' => 'Searched Client',
+            'SearchInfo' => $searchList
+        ],200);
+    }
 }
