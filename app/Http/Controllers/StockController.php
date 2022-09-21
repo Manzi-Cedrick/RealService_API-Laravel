@@ -89,4 +89,16 @@ class StockController extends Controller
             'Stock Info' => $deleteStock
         ],200);
     }
+    public function SearchList(Request $request){
+        $stock_query= Stock::with(['Products_Stock']);
+        if($request->keyword){
+            $stock_query->where('Stock_Name','LIKE','%'.$request->keyword.'%');
+        }
+        $searchList = $stock_query->get();
+        return response()->json([
+            'status' => true,
+            'message' => 'Searched Stocks',
+            'SearchInfo' => $searchList
+        ],200);
+    }
 }
