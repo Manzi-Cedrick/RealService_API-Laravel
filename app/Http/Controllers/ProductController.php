@@ -41,11 +41,28 @@ class ProductController extends Controller
         ],200);
     }
     public function ShowSingleProductClients(Product $product){
-        $finalClientList = Product::find($product->id)->Client;
+        $finalClientList = Product::find($product->id)->Client->toArray();
         return response()->json([
             'status' => true,
             'message' => 'Product successfully Displayed',
             'Products" clients' => $finalClientList,
+        ],200);
+    }
+    public function SearchList(Request $request){
+        $product_query= Product::with(['Client']);
+        if($request->keyword){
+            $product_query->where('ProductName','LIKE','%'.$request->keyword.'%');
+        }
+        if($request->search){
+            $product_query->whereHas('Client',function ($query) use ($request){
+                $query->where('FirstName',$request->search);
+            });
+        }
+        $searchList = $product_query->get();
+        return response()->json([
+            'status' => true,
+            'message' => 'Searched Product',
+            'SearchInfo' => $searchList
         ],200);
     }
 }
