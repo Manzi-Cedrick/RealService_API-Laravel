@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register',[Auth::class,'Register'])->middleware('guest');
 Route::post('/login',[Auth::class,'Login'])->middleware('guest');
 Route::post('/logout',[Auth::class,'Logout'])->middleware('auth:sanctum');
+Route::post('/forgotpassword',[Auth::class,'ForgotPassword']);
 
 //Protected Client Routes
 Route::group(['middleware'=>'auth:sanctum'],function (){
