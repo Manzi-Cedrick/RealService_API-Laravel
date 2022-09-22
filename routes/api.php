@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/register',[Auth::class,'Register']);
-Route::post('/login',[Auth::class,'Login']);
-Route::post('/logout',[Auth::class,'Logout']);
+Route::post('/register',[Auth::class,'Register'])->middleware('guest');
+Route::post('/login',[Auth::class,'Login'])->middleware('guest');
+Route::post('/logout',[Auth::class,'Logout'])->middleware('auth:sanctum');
 
 //Protected Client Routes
 Route::group(['middleware'=>'auth:sanctum'],function (){
