@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/register',[Auth::class,'Register']);
 Route::post('/login',[Auth::class,'Login']);
+Route::post('/logout',[Auth::class,'Logout']);
 
 Route::get('/clientAll',[ClientControl::class,'index'])->middleware('auth:sanctum');
 Route::post('/createClient',[ClientControl::class,'store']);
