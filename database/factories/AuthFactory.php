@@ -19,7 +19,6 @@ class AuthFactory extends Factory
         return [
             //
             'name' => fake()->name(),
-            'Telephone' => fake()->phoneNumber(),
             'email'=>fake()->email(),
             'password' => fake()->min(6)->password(),
         ];
