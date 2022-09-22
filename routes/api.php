@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+//protected Routes
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/register',[Auth::class,'Register']);
+Route::post('/login',[Auth::class,'Login']);
 
 Route::get('/clientAll',[ClientControl::class,'index']);
 Route::post('/createClient',[ClientControl::class,'store']);
