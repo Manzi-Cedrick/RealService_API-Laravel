@@ -24,7 +24,7 @@ class Auth extends Controller
             'User' => $RegisteredUser,
         ],200);
     }
-    public function Login(LoginRequest $request){
+    public function Login(Request $request){
         if(FacadesAuth::attempt($request->only('email','password'))){
             return response()->json([
                 'status' => true,
