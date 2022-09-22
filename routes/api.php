@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth;
 use App\Http\Controllers\ClientControl;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StockController;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/register',[Auth::class,'Register']);
 
 Route::get('/clientAll',[ClientControl::class,'index']);
 Route::post('/createClient',[ClientControl::class,'store']);
