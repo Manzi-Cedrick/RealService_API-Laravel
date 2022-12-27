@@ -29,13 +29,13 @@ Route::post('/forgotpassword',[Auth::class,'ForgotPassword']);
 
 //Protected Client Routes
 Route::group(['middleware'=>'auth:sanctum'],function (){
-    Route::get('/clients',[ClientControl::class,'index']);
-    Route::post('/createClient',[ClientControl::class,'store']);
-    Route::put('/updateClient/{client}',[ClientControl::class,'update']);
-    Route::delete('/deleteClient/{client}',[ClientControl::class,'destroy']);
-    Route::get('/singleClientInfo/{client}',[ClientControl::class,'ShowSingleClient']);
-    Route::get('/allsales',[ClientControl::class,'AllSales']);
-    Route::get('/clientsearch',[ClientControl::class,'SearchList']);
+    Route::get('/clients',[ClientControl::class,'indexClient']);
+    Route::post('/create/client',[ClientControl::class,'storeClient']);
+    Route::put('/update/client/{client}',[ClientControl::class,'updateClient']);
+    Route::delete('/delete/client/{client}',[ClientControl::class,'destroyClient']);
+    Route::get('/client/{client}',[ClientControl::class,'ShowSingleClient']);
+    Route::get('/sales',[ClientControl::class,'AllSales']);
+    Route::get('/search/client',[ClientControl::class,'SearchListClient']);
 });
 
 //Protected Product routes
@@ -51,10 +51,10 @@ Route::group(['middleware' => 'auth:sanctum'],function (){
 //Protected Stock routes
 
 Route::group(['middleware' => 'auth:sanctum'],function (){
-    Route::get('/stocks',[StockController::class,'index']);
-    Route::post('/createstock',[StockController::class,'store']);
-    Route::put('/updatestock/{stock}',[StockController::class,'update']);
-    Route::delete('/deletestock/{stock}',[StockController::class,'destroy']);
-    Route::get('/singleStockList/{stock}',[StockController::class,'ShowSingleStock']);
-    Route::get('/stocksearch',[StockController::class,'SearchList']);
+    Route::get('/stocks',[StockController::class,'indexStock']);
+    Route::post('/create/stock',[StockController::class,'storeStock']);
+    Route::put('/update/stock/{stock}',[StockController::class,'updateStock']);
+    Route::delete('/delete/stock/{stock}',[StockController::class,'destroyStock']);
+    Route::get('/stock/{stock}',[StockController::class,'ShowSingleStock']);
+    Route::get('/search/stock',[StockController::class,'SearchListStock']);
 });
