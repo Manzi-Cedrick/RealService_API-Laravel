@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterRequest;
 use App\Mail\MailNotify;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,10 +11,41 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\PersonalAccessToken;
+use OpenApi\Annotations as OA;
 
 class Auth extends Controller
 {
-    //
+
+    /**
+     * @OA\Post(
+     *     path="/api/register",
+     *     tags={"Auth"},
+     *     summary="Register",
+     *     description="Create your account via this endpoint",
+     *     operationId="Register",
+ *     @OA\RequestBody(
+     *      required=true,
+     *      description="Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+     *      @OA\JsonContent(
+     *          required={"name","email","password"},
+     *          @OA\Property(property="name", type="string", format="name", example="John Doe"),
+     *          @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *          @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *    ),
+     * ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value",
+     *          @OA\JsonContent(
+ *                  @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
+ *        )
+     *     )
+     * )
+     */
     public function Register(Request $request)
     {
         $fields = $request->validate([
@@ -36,6 +66,33 @@ class Auth extends Controller
             'Token' => $token
         ], 200);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/login",
+     *     tags={"Auth"},
+     *     summary="Login",
+     *     description="Login by email and password",
+     *     operationId="Login",
+     *     @OA\RequestBody(
+     *      required=true,
+     *      description="Pass user credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+     *      @OA\JsonContent(
+     *          required={"email","password"},
+     *          @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *          @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *    ),
+     * ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     )
+     * )
+     */
     public function Login(Request $request)
     {
         $fields = $request->validate([
@@ -57,6 +114,24 @@ class Auth extends Controller
             'Token' => $token
         ], 200);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/logout",
+     *     tags={"Auth"},
+     *     summary="Logout",
+     *     description="Multiple status values can be provided with comma separated string",
+     *     operationId="Logout",
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     )
+     * )
+     */
     public function Logout(Request $request)
     {
         $accessToken = $request->bearerToken();
