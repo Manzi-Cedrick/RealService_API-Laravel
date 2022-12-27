@@ -143,6 +143,313 @@
                 }
             }
         },
+        "/api/clients": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Get all clients",
+                "description": "Get all clients. Make sure you have a valid token",
+                "operationId": "indexClient",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/create/client": {
+            "post": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Create client",
+                "description": "Create Client. Make sure you have a valid token",
+                "operationId": "storeClient",
+                "requestBody": {
+                    "description": "Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "Firstname",
+                                    "Lastname",
+                                    "Cash_Paid_Frw",
+                                    "Status_Payment",
+                                    "Quantity_Paid_For",
+                                    "Description_Work"
+                                ],
+                                "properties": {
+                                    "Firstname": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Manzi"
+                                    },
+                                    "Lastname": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Teteli"
+                                    },
+                                    "Cash_Paid_Frw": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": "101.240"
+                                    },
+                                    "Status_Payment": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Not Paid"
+                                    },
+                                    "Quantity_Paid_For": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": 25
+                                    },
+                                    "Description_Work": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Provident neque et ipsam magni quia neque. Error voluptatem delectus aut quia voluptatum. Ut assumenda quaerat vitae corporis dolorem."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/update/client/{client}": {
+            "put": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Update client",
+                "description": "Update Client. Make sure you have a valid token",
+                "operationId": "updateClient",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Select the client to updateClient",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "Firstname",
+                                    "Lastname",
+                                    "Cash_Paid_Frw",
+                                    "Status_Payment",
+                                    "Quantity_Paid_For",
+                                    "Description_Work"
+                                ],
+                                "properties": {
+                                    "Firstname": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Manzi"
+                                    },
+                                    "Lastname": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Teteli"
+                                    },
+                                    "Cash_Paid_Frw": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": "101.240"
+                                    },
+                                    "Status_Payment": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Not Paid"
+                                    },
+                                    "Quantity_Paid_For": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": 25
+                                    },
+                                    "Description_Work": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Provident neque et ipsam magni quia neque. Error voluptatem delectus aut quia voluptatum. Ut assumenda quaerat vitae corporis dolorem."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/delete/client/{client}": {
+            "delete": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Delete client",
+                "description": "Delete Client. Make sure you have a valid token",
+                "operationId": "destroyClient",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Select the client to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/client/{client}": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "View client",
+                "description": "View Client Details. Make sure you have a valid token",
+                "operationId": "ShowSingleClient",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Select the client to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/sales": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Sales Detail",
+                "description": "Sales list. Make sure you have a valid token",
+                "operationId": "AllSales",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/search/client": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Search client",
+                "description": "Search Client names. Make sure you have a valid token",
+                "operationId": "SearchListClient",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "query",
+                        "description": "Select the client to update",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [
@@ -406,6 +713,266 @@
                         "name": "search",
                         "in": "query",
                         "description": "Select the product to view",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stocks": {
+            "get": {
+                "tags": [
+                    "Stock"
+                ],
+                "summary": "Get all stocks",
+                "description": "Get all stocks. Make sure you have a valid token",
+                "operationId": "indexStock",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/create/stock": {
+            "post": {
+                "tags": [
+                    "Stock"
+                ],
+                "summary": "Create stock",
+                "description": "Create stock. Make sure you have a valid token",
+                "operationId": "storeStock",
+                "requestBody": {
+                    "description": "Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "Stock_Name",
+                                    "Stock_Quantity",
+                                    "Registration_Date",
+                                    "Expiration_Date"
+                                ],
+                                "properties": {
+                                    "Stock_Name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Manzi"
+                                    },
+                                    "Stock_Quantity": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": 25
+                                    },
+                                    "Registration_Date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1974-04-16"
+                                    },
+                                    "Expiration_Date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1974-04-16"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stock/{stock}": {
+            "get": {
+                "tags": [
+                    "Stock"
+                ],
+                "summary": "View stock",
+                "description": "View stock Details. Make sure you have a valid token",
+                "operationId": "ShowSingleStock",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Select the client to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/update/stock/{stock}": {
+            "put": {
+                "tags": [
+                    "Stock"
+                ],
+                "summary": "Update stock",
+                "description": "Update stock. Make sure you have a valid token",
+                "operationId": "updateStock",
+                "parameters": [
+                    {
+                        "name": "stock",
+                        "in": "path",
+                        "description": "Select the stock to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "Stock_Name",
+                                    "Stock_Quantity",
+                                    "Registration_Date",
+                                    "Expiration_Date"
+                                ],
+                                "properties": {
+                                    "Stock_Name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Manzi"
+                                    },
+                                    "Stock_Quantity": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": 25
+                                    },
+                                    "Registration_Date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1974-04-16"
+                                    },
+                                    "Expiration_Date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1974-04-16"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/delete/stock/{stock}": {
+            "delete": {
+                "tags": [
+                    "Stock"
+                ],
+                "summary": "Delete stock",
+                "description": "Delete stock. Make sure you have a valid token",
+                "operationId": "destroyStock",
+                "parameters": [
+                    {
+                        "name": "stock",
+                        "in": "path",
+                        "description": "Select the stock to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/search/stock": {
+            "get": {
+                "tags": [
+                    "Stock"
+                ],
+                "summary": "Search stock",
+                "description": "Search Stock names. Make sure you have a valid token",
+                "operationId": "SearchListStock",
+                "parameters": [
+                    {
+                        "name": "stock",
+                        "in": "query",
+                        "description": "Select the stock to search",
                         "required": true,
                         "schema": {
                             "type": "string"
