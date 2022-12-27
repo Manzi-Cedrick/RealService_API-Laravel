@@ -1,0 +1,441 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "REAL SERVICE Ltd",
+        "description": "OpenApi description",
+        "contact": {
+            "email": "cedrickmanzii0@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0",
+        "x-logo": {
+            "url": "https://via.placeholder.com/190x90.png?text=L5-Swagger"
+        }
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register",
+                "description": "Create your account via this endpoint",
+                "operationId": "Register",
+                "requestBody": {
+                    "description": "Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "description": "Login by email and password",
+                "operationId": "Login",
+                "requestBody": {
+                    "description": "Pass user credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "Logout",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get All products",
+                "description": "Get All products. Make sure you have a valid token",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/create/product": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Create product",
+                "description": "Get All products. Make sure you have a valid token",
+                "operationId": "store",
+                "requestBody": {
+                    "description": "Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "ProductName",
+                                    "ProductPrice",
+                                    "StockID",
+                                    "ProductQRCode",
+                                    "Quantity",
+                                    "Description"
+                                ],
+                                "properties": {
+                                    "ProductName": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Tomato"
+                                    },
+                                    "ProductPrice": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": "129.02"
+                                    },
+                                    "StockID": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": "1"
+                                    },
+                                    "ProductQRCode": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "MR23QR"
+                                    },
+                                    "Quantity": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "23"
+                                    },
+                                    "Description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Dolores quas eum ea laudantium. Necessitatibus aut blanditiis cumque sit sed odio in fuga. Iste aut hic asperiores."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/update/product/{product}": {
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update product",
+                "description": "Get All products. Make sure you have a valid token",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Select the product to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "ProductName",
+                                    "ProductPrice",
+                                    "StockID",
+                                    "ProductQRCode",
+                                    "Quantity",
+                                    "Description"
+                                ],
+                                "properties": {
+                                    "ProductName": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Tomato"
+                                    },
+                                    "ProductPrice": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": "129.02"
+                                    },
+                                    "StockID": {
+                                        "type": "number",
+                                        "format": "number",
+                                        "example": "1"
+                                    },
+                                    "ProductQRCode": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "MR23QR"
+                                    },
+                                    "Quantity": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "23"
+                                    },
+                                    "Description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Dolores quas eum ea laudantium. Necessitatibus aut blanditiis cumque sit sed odio in fuga. Iste aut hic asperiores."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/delete/product/{product}": {
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Detete the product",
+                "description": "Delete the product. Make sure you have a valid token",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Select the product to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/product/{product}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Show details of a product",
+                "description": "View the product. Make sure you have a valid token",
+                "operationId": "ShowSingleProductClients",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Select the product to view",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/search/product": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Show details of a product",
+                "description": "View the product. Make sure you have a valid token",
+                "operationId": "SearchList",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Select the product to view",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
