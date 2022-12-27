@@ -8,12 +8,25 @@ use Illuminate\Http\Request;
 
 class StockController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+        /**
+     * @OA\Get(
+     *     path="/api/stocks",
+     *     tags={"Stock"},
+     *     summary="Get all stocks",
+     *     description="Get all stocks. Make sure you have a valid token",
+     *     operationId="indexStock",
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     ),
+     *     security={{"bearer_token":{}}}
+     * )
      */
-    public function index()
+    public function indexStock()
     {
         //
         return response()->json([
@@ -22,13 +35,36 @@ class StockController extends Controller
             'Stock Info' => Stock::with('Products_Stock')->get(),
         ],200);
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+           /**
+     * @OA\POST(
+     *     path="/api/create/stock",
+     *     tags={"Stock"},
+     *     summary="Create stock",
+     *     description="Create stock. Make sure you have a valid token",
+     *     operationId="storeStock",
+     *     security={{"bearer_token":{}}},
+     *  @OA\RequestBody(
+     *      required=true,
+     *      description="Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+     *      @OA\JsonContent(
+     *          required={"Stock_Name","Stock_Quantity","Registration_Date","Expiration_Date"},
+     *          @OA\Property(property="Stock_Name", type="string", format="name", example="Manzi"),
+     *          @OA\Property(property="Stock_Quantity", type="number", format="number", example=25),
+     *          @OA\Property(property="Registration_Date", type="date", format="date", example="1974-04-16"),
+     *          @OA\Property(property="Expiration_Date", type="date", format="date", example="1974-04-16"),
+     *    ),
+     * ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     )
+     * )
      */
-    public function store(StockRequest $request)
+    public function storeStock(StockRequest $request)
     {
         //
         $StockStore = Stock::create($request->all());
@@ -38,12 +74,32 @@ class StockController extends Controller
             'Stock Info' => $StockStore,
         ],200);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     /**
+     * @OA\GET(
+     *     path="/api/stock/{stock}",
+     *     tags={"Stock"},
+     *     summary="View stock",
+     *     description="View stock Details. Make sure you have a valid token",
+     *     operationId="ShowSingleStock",
+     *     security={{"bearer_token":{}}},
+     *   @OA\Parameter(
+     *         name="client",
+     *         description="Select the client to update",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ) 
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     )
+     * )
      */
     public function ShowSingleStock($id)
     {
@@ -55,14 +111,45 @@ class StockController extends Controller
             'Stock Info'=> $SingleStockInfo
         ]);
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+          /**
+     * @OA\PUT(
+     *     path="/api/update/stock/{stock}",
+     *     tags={"Stock"},
+     *     summary="Update stock",
+     *     description="Update stock. Make sure you have a valid token",
+     *     operationId="updateStock",
+     *     security={{"bearer_token":{}}},
+     *   @OA\Parameter(
+     *         name="stock",
+     *         description="Select the stock to update",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ) 
+     *     ),
+     *  @OA\RequestBody(
+     *      required=true,
+     *      description="Enter valid credentials. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+     *      @OA\JsonContent(
+     *          required={"Stock_Name","Stock_Quantity","Registration_Date","Expiration_Date"},
+     *          @OA\Property(property="Stock_Name", type="string", format="name", example="Manzi"),
+     *          @OA\Property(property="Stock_Quantity", type="number", format="number", example=25),
+     *          @OA\Property(property="Registration_Date", type="date", format="date", example="1974-04-16"),
+     *          @OA\Property(property="Expiration_Date", type="date", format="date", example="1974-04-16"),
+     *    ),
+     * ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     )
+     * )
      */
-    public function update(Request $request,$id)
+    public function updateStock(Request $request,$id)
     {
         //
         $updateStock = Stock::find($id)->update($request->all());
@@ -73,13 +160,34 @@ class StockController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+      /**
+     * @OA\DELETE(
+     *     path="/api/delete/stock/{stock}",
+     *     tags={"Stock"},
+     *     summary="Delete stock",
+     *     description="Delete stock. Make sure you have a valid token",
+     *     operationId="destroyStock",
+     *     security={{"bearer_token":{}}},
+     *   @OA\Parameter(
+     *         name="stock",
+     *         description="Select the stock to update",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ) 
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     )
+     * )
      */
-    public function destroy(Stock $stock)
+    public function destroyStock(Stock $stock)
     {
         //
         $deleteStock = Stock::find($stock->id)->delete();
@@ -89,7 +197,34 @@ class StockController extends Controller
             'Stock Info' => $deleteStock
         ],200);
     }
-    public function SearchList(Request $request){
+          /**
+     * @OA\GET(
+     *     path="/api/search/stock",
+     *     tags={"Stock"},
+     *     summary="Search stock",
+     *     description="Search Stock names. Make sure you have a valid token",
+     *     operationId="SearchListStock",
+     *     security={{"bearer_token":{}}},
+     *   @OA\Parameter(
+     *         name="stock",
+     *         description="Select the stock to search",
+     *         in="query",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         ) 
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     )
+     * )
+     */
+    public function SearchListStock(Request $request){
         $stock_query= Stock::with(['Products_Stock']);
         if($request->keyword){
             $stock_query->where('Stock_Name','LIKE','%'.$request->keyword.'%');
