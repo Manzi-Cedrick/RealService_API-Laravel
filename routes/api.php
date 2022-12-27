@@ -29,7 +29,7 @@ Route::post('/forgotpassword',[Auth::class,'ForgotPassword']);
 
 //Protected Client Routes
 Route::group(['middleware'=>'auth:sanctum'],function (){
-    Route::get('/clientAll',[ClientControl::class,'index']);
+    Route::get('/clients',[ClientControl::class,'index']);
     Route::post('/createClient',[ClientControl::class,'store']);
     Route::put('/updateClient/{client}',[ClientControl::class,'update']);
     Route::delete('/deleteClient/{client}',[ClientControl::class,'destroy']);
@@ -40,18 +40,18 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
 
 //Protected Product routes
 Route::group(['middleware' => 'auth:sanctum'],function (){
-    Route::get('/productsAll',[ProductController::class,'index']);
-    Route::post('/createproduct',[ProductController::class,'store']);
-    Route::put('/updateproduct/{product}',[ProductController::class,'update']);
-    Route::delete('/deleteproduct/{product}',[ProductController::class,'destroy']);
-    Route::get('/singleproductClients/{product}',[ProductController::class,'ShowSingleProductClients']);
-    Route::get('/productsearch',[ProductController::class,'SearchList']);
+    Route::get('/products',[ProductController::class,'index']);
+    Route::post('/create/product',[ProductController::class,'store']);
+    Route::put('/update/product/{product}',[ProductController::class,'update']);
+    Route::delete('/delete/product/{product}',[ProductController::class,'destroy']);
+    Route::get('/product/{product}',[ProductController::class,'ShowSingleProductClients']);
+    Route::get('/search/product',[ProductController::class,'SearchList']);
 });
 
 //Protected Stock routes
 
 Route::group(['middleware' => 'auth:sanctum'],function (){
-    Route::get('/stockAll',[StockController::class,'index']);
+    Route::get('/stocks',[StockController::class,'index']);
     Route::post('/createstock',[StockController::class,'store']);
     Route::put('/updatestock/{stock}',[StockController::class,'update']);
     Route::delete('/deletestock/{stock}',[StockController::class,'destroy']);
